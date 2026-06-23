@@ -207,7 +207,7 @@
   <div class="links">
     <a href="#work">Work</a>
     <a href="#approach">Approach</a>
-    <a href="#voices">Studio</a>
+    <a href="#collaborators">Studio</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -271,14 +271,7 @@
   </div>
 </section>
 
-<!-- VOICES / TESTIMONIALS -->
-<section class="voices" id="voices">
-  <div class="wrap reveal">
-    <div class="eyebrow">From the studios we work with</div>
-    <h2>The work speaks — so do our collaborators.</h2>
-    <div class="quotes" id="quotes"></div>
-  </div>
-</section>
+<!-- VOICES / TESTIMONIALS — removed for now; re-add this section when real quotes are ready -->
 
 <!-- COLLABORATORS -->
 <section class="collab2" id="collaborators">
@@ -523,7 +516,8 @@
   }
 
   function renderTestimonials(items){
-    document.getElementById("quotes").innerHTML=(items||[]).map(t=>
+    const box=document.getElementById("quotes");if(!box)return;
+    box.innerHTML=(items||[]).map(t=>
       `<div class="quote ${t.placeholder?"ph":""}"><div class="q">“${esc(t.quote)}”</div>
        <div class="by"><b>${esc(t.name)}</b> · ${esc(t.practice)}</div></div>`).join("");
   }
