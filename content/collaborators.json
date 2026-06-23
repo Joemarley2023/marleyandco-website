@@ -1,18 +1,9 @@
 {
   "collaborators": [
-    {
-      "name": "Olaver Architecture",
-      "category": "architect",
-      "url": "https://www.olaver.com.au/",
-      "placeholder": false
-    },
-    {
-      "name": "Glyde ",
-      "category": "builder",
-      "placeholder": false
-    },
-    {
-      "placeholder": false
-    }
+    { "name": "Olaver Architecture", "category": "architect", "url": "https://www.olaver.com.au/", "logo": "", "placeholder": false },
+    { "name": "Hyland Built", "category": "builder", "url": "https://www.hylandbuilt.com/", "logo": "/assets/uploads/logos/hyland.svg", "placeholder": false },
+    { "name": "Tom Ross", "category": "photographer", "url": "https://tomross.xyz/", "logo": "", "placeholder": false },
+    { "name": "DC Building", "category": "builder", "url": "https://dcbuildingvic.com.au/", "logo": "/assets/uploads/logos/dc-building.png", "placeholder": false },
+    { "name": "Glyde", "category": "builder", "url": "", "logo": "", "placeholder": false }
   ]
 }
