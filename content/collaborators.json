@@ -4,6 +4,6 @@
     { "name": "Hyland Built", "category": "builder", "url": "https://www.hylandbuilt.com/", "logo": "/assets/uploads/logos/hyland.svg", "placeholder": false },
     { "name": "Tom Ross", "category": "photographer", "url": "https://tomross.xyz/", "logo": "", "placeholder": false },
     { "name": "DC Building", "category": "builder", "url": "https://dcbuildingvic.com.au/", "logo": "/assets/uploads/logos/dc-building.png", "placeholder": false },
-    { "name": "Glyde", "category": "builder", "url": "", "logo": "", "placeholder": false }
+    { "name": "Glyde", "category": "builder", "url": "https://glyde.com.au/", "logo": "/assets/uploads/logos/glyde.webp", "placeholder": false }
   ]
 }

@@ -284,9 +284,12 @@
       </div>
     </div>
 
-    <form class="reveal" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" id="enquiry">
-      <input type="hidden" name="form-name" value="enquiry">
-      <p style="display:none"><label>Leave blank: <input name="bot-field"></label></p>
+    <form class="reveal" method="POST" action="https://formsubmit.co/accounts@marleyandco.com.au" enctype="multipart/form-data" id="enquiry">
+      <input type="hidden" name="_subject" value="New enquiry — Marley & Co website">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" id="formNext" value="https://marleyandco-website.joe-4a1.workers.dev/thanks.html">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="grp">
         <label class="lbl">Name <span class="opt-note">(required)</span></label>
@@ -433,17 +436,12 @@
     document.getElementById("fname").textContent=names.length?names.join(", "):"";
   });}
 
-  // enquiry submit: posts to Netlify Forms when live; graceful thank-you in local preview
+  // enquiry: native POST to FormSubmit; the post-submit redirect uses the current domain
   const form=document.getElementById("enquiry");
-  if(form){form.addEventListener("submit",async function(e){
-    e.preventDefault();
-    if(!form.reportValidity())return;
-    const status=document.getElementById("formstatus");
-    if(location.protocol.startsWith("http")){try{await fetch("/",{method:"POST",body:new FormData(form)});}catch(err){}}
-    form.parentNode.appendChild(status);
-    form.style.display="none";status.style.display="block";
-    status.scrollIntoView({behavior:"smooth",block:"center"});
-  });}
+  if(form){
+    const nx=document.getElementById("formNext");
+    if(nx)nx.value=location.origin+"/thanks.html";
+  }
 
   // ---------- gallery (data-driven) ----------
   let PROJECTS=[];
