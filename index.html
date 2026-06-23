@@ -182,10 +182,13 @@
     font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
   .cfilters button.active,.cfilters button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  .ctile{aspect-ratio:3/2;border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;text-align:center;padding:14px;background:var(--paper);
+  .ctile{position:relative;aspect-ratio:3/2;border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:14px;background:var(--paper);text-decoration:none;
     font-family:"Fraunces",serif;font-size:18px;color:var(--ink);transition:all .2s;line-height:1.15}
   .ctile:hover{border-color:var(--bronze);transform:translateY(-2px)}
+  a.ctile.linked{cursor:pointer}
+  a.ctile.linked::after{content:"↗";position:absolute;top:9px;right:11px;font-family:"Inter";font-size:12px;color:var(--bronze);opacity:0;transition:opacity .2s}
+  a.ctile.linked:hover::after{opacity:1}
   .ctile.ph2{color:var(--muted);font-family:"Inter";font-size:14px;font-style:italic}
   .ctile small{font-family:"Inter";font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze);margin-top:8px;font-style:normal}
   @media(max-width:980px){.cgrid{grid-template-columns:repeat(3,1fr)}}
@@ -537,11 +540,11 @@
   function deriveCollaborators(){
     const map=new Map();
     COLLAB_MANUAL.forEach(c=>{if(c&&c.name&&c.name.trim())map.set(c.name.trim().toLowerCase(),
-      {name:c.name.trim(),category:c.category||"designer",logo:c.logo||"",placeholder:!!c.placeholder});});
+      {name:c.name.trim(),category:c.category||"designer",logo:c.logo||"",url:c.url||"",placeholder:!!c.placeholder});});
     const roles=[["architect","architect"],["interiorDesigner","designer"],["builder","builder"],["photographer","photographer"]];
     PROJECTS.forEach(p=>roles.forEach(([field,cat])=>{
       const v=(p[field]||"").trim();if(!v)return;
-      const k=v.toLowerCase();if(!map.has(k))map.set(k,{name:v,category:cat,logo:"",placeholder:false});
+      const k=v.toLowerCase();if(!map.has(k))map.set(k,{name:v,category:cat,logo:"",url:"",placeholder:false});
     }));
     return [...map.values()];
   }
@@ -551,7 +554,11 @@
     grid.innerHTML=list.length?list.map(c=>{
       const inner=c.logo?`<img src="${c.logo}" alt="${esc(c.name)}" style="max-height:46px;max-width:80%;object-fit:contain">`
                         :(c.placeholder?"+ "+esc(c.name):esc(c.name));
-      return `<div class="ctile ${c.placeholder&&!c.logo?"ph2":""}">${inner}<small>${catLabel[c.category]||""}</small></div>`;
+      const body=`${inner}<small>${catLabel[c.category]||""}</small>`;
+      const cls=`ctile${c.placeholder&&!c.logo?" ph2":""}${c.url?" linked":""}`;
+      return c.url
+        ? `<a class="${cls}" href="${esc(c.url)}" target="_blank" rel="noopener">${body}</a>`
+        : `<div class="${cls}">${body}</div>`;
     }).join(""):`<div class="ctile ph2" style="grid-column:1/-1">Credit a studio on a project and they appear here automatically</div>`;
   }
   function wireCollabFilters(){

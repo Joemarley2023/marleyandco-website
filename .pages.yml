@@ -64,7 +64,7 @@ content:
         type: object
         list: true
         fields:
-          - { name: name, label: Name, type: string }
+          - { name: name, label: Name (match how it's credited on projects), type: string }
           - name: category
             label: Category
             type: select
@@ -73,5 +73,7 @@ content:
                 - architect
                 - designer
                 - builder
-          - { name: logo, label: Logo (optional), type: image }
-          - { name: placeholder, label: Is a placeholder?, type: boolean }
+                - photographer
+          - { name: url, label: Website URL (makes the logo clickable), type: string, required: false }
+          - { name: logo, label: Logo (PNG/SVG, optional), type: image, required: false }
+          - { name: placeholder, label: Is a placeholder?, type: boolean, required: false }
