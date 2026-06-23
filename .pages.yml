@@ -28,6 +28,7 @@ content:
           - { name: location, label: Location (suburb, city), type: string }
           - { name: year, label: Year, type: string, required: false }
           - { name: slug, label: ID (lowercase, no spaces), type: string }
+          - { name: featured, label: Feature on landing page? (leave a few; all show on the Projects page), type: boolean, required: false }
           - { name: description, label: Short description, type: text }
           - { name: materials, label: Key materials (comma separated), type: string, required: false }
           - { name: architect, label: Architect, type: string, required: false }

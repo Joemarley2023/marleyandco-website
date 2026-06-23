@@ -209,6 +209,7 @@
   <a class="wm" href="#top">Marley &amp; Co</a>
   <div class="links">
     <a href="#work">Work</a>
+    <a href="projects.html">Projects</a>
     <a href="#collaborators">Studio</a>
     <a href="#contact">Contact</a>
   </div>
@@ -241,7 +242,7 @@
   <div class="wrap">
     <div class="head reveal">
       <h2>Selected work</h2>
-      <div class="eyebrow">Melbourne · Residential</div>
+      <a href="projects.html" class="viewall">View all projects →</a>
     </div>
 
     <div id="workgrid"></div>
@@ -481,7 +482,9 @@
   function renderWork(projects){
     PROJECTS=projects;
     const grid=document.getElementById("workgrid");
-    grid.innerHTML=projects.map(p=>{
+    const featured=projects.filter(p=>p.featured);
+    const shown=(featured.length?featured:projects).slice(0,4);
+    grid.innerHTML=shown.map(p=>{
       const n=(p.gallery||[]).length;
       const viewLabel=n>1?`View all ${n} photos →`:"View project →";
       const sub=(p.secondary&&p.secondary.length)

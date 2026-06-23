@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Marley &amp; Co</title>
+<meta name="description" content="Our work — bespoke joinery and architectural cabinetry across Melbourne homes by Marley & Co Custom Cabinetry." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1c1a17;--paper:#f4f1ea;--paper2:#ece7dd;--line:#d8d1c4;--bronze:#8a6d4b;--muted:#7c7568;--maxw:1280px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",sans-serif;color:var(--ink);background:var(--paper);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Fraunces",serif;font-weight:400;line-height:1.08;letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);font-weight:500}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+      padding:22px 40px;mix-blend-mode:difference;color:#fff;transition:padding .3s}
+  nav.scrolled{padding:14px 40px}
+  nav .wm{font-family:"Fraunces",serif;font-size:20px;letter-spacing:.02em}
+  nav .links{display:flex;gap:34px;font-size:13px;letter-spacing:.04em}
+  nav .links a{opacity:.85;transition:opacity .2s}nav .links a:hover{opacity:1}
+  @media(max-width:760px){nav .links{display:none}nav{padding:18px 22px}}
+
+  .phead{max-width:var(--maxw);margin:0 auto;padding:150px 40px 30px}
+  .phead h1{font-size:clamp(36px,6vw,76px);margin:10px 0 16px}
+  .phead p{color:var(--muted);font-size:16px;max-width:52ch}
+  .archive{max-width:var(--maxw);margin:0 auto;padding:30px 40px 110px;display:grid;grid-template-columns:repeat(2,1fr);gap:50px 30px}
+  .pcard{cursor:zoom-in}
+  .pcard .frame{overflow:hidden;background:#ddd}
+  .pcard .frame img{width:100%;height:46vh;min-height:300px;object-fit:cover;transition:transform 1s ease}
+  .pcard:hover .frame img{transform:scale(1.04)}
+  .pcard h3{font-size:clamp(20px,2.2vw,27px);margin-top:16px}
+  .pcard .loc{color:var(--bronze);font-size:12.5px;letter-spacing:.04em;margin-top:5px}
+  .pcard .desc{color:var(--muted);font-size:14.5px;margin-top:9px;max-width:48ch}
+  .pcard .credits{margin-top:11px;font-size:12px;color:var(--muted);letter-spacing:.02em}
+  .pcard .credits span{color:var(--ink)}
+  .pcard .viewall{margin-top:12px;display:inline-block;color:var(--bronze);font-size:13px;letter-spacing:.04em}
+  @media(max-width:760px){.phead{padding:120px 22px 20px}.archive{grid-template-columns:1fr;padding:20px 22px 80px;gap:40px}}
+
+  /* gallery lightbox */
+  .gallery{position:fixed;inset:0;z-index:90;background:rgba(20,18,15,.97);display:none;flex-direction:column}
+  .gallery.open{display:flex}
+  .gtop{display:flex;align-items:center;gap:16px;padding:18px 26px;color:#f4f1ea;font-family:"Fraunces",serif}
+  .gtop #gtitle{font-size:20px}
+  .gtop #gcount{font-family:"Inter";font-size:13px;color:#b8b1a4;letter-spacing:.05em}
+  .gtop #gclose{margin-left:auto;background:none;border:none;color:#f4f1ea;font-size:30px;cursor:pointer;line-height:1}
+  .gstage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 70px}
+  #gimg{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+  .gnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;
+        width:48px;height:48px;border-radius:50%;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .gnav:hover{background:rgba(255,255,255,.22)}
+  .gprev{left:18px}.gnext{right:18px}
+  .gthumbs{display:flex;gap:8px;padding:14px 26px;overflow-x:auto;justify-content:flex-start}
+  .gthumbs img{height:62px;width:84px;object-fit:cover;opacity:.4;cursor:pointer;transition:opacity .2s;flex:0 0 auto;border-radius:3px}
+  .gthumbs img.active,.gthumbs img:hover{opacity:1}
+  @media(max-width:760px){.gstage{padding:0 10px}.gnav{width:38px;height:38px;font-size:20px}.gthumbs img{height:44px;width:60px}}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  footer{background:var(--ink);color:#8e887b;border-top:1px solid rgba(255,255,255,.1);
+         padding:30px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;letter-spacing:.03em}
+  footer a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="wm" href="index.html">Marley &amp; Co</a>
+  <div class="links">
+    <a href="index.html#work">Work</a>
+    <a href="projects.html">Projects</a>
+    <a href="index.html#collaborators">Studio</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="phead reveal">
+  <div class="eyebrow">Projects</div>
+  <h1>Our work</h1>
+  <p>Bespoke joinery across Melbourne homes — kitchens, bathrooms, wardrobes and whole-of-home fit-outs. Click any project to see the full set.</p>
+</header>
+
+<div class="archive" id="archive"></div>
+
+<!-- GALLERY -->
+<div class="gallery" id="gallery">
+  <div class="gtop"><span id="gtitle"></span><span id="gcount"></span><button id="gclose" aria-label="Close">&times;</button></div>
+  <div class="gstage">
+    <button class="gnav gprev" id="gprev" aria-label="Previous">‹</button>
+    <img id="gimg" src="" alt="">
+    <button class="gnav gnext" id="gnext" aria-label="Next">›</button>
+  </div>
+  <div class="gthumbs" id="gthumbs"></div>
+</div>
+
+<footer>
+  <span>© Marley &amp; Co Custom Cabinetry · Melbourne</span>
+  <span><a href="index.html">Home →</a></span>
+</footer>
+
+<script>
+  const nav=document.getElementById("nav");
+  addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>40));
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.1});
+  function observeReveals(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el));}
+  observeReveals();
+  function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  // gallery
+  let PROJECTS=[];
+  const gEl=document.getElementById("gallery"),gImg=document.getElementById("gimg"),
+        gThumbs=document.getElementById("gthumbs"),gTitle=document.getElementById("gtitle"),gCount=document.getElementById("gcount");
+  let gList=[],gIdx=0;
+  function gShow(i){if(!gList.length)return;gIdx=(i+gList.length)%gList.length;gImg.src=gList[gIdx];
+    gCount.textContent=`${gIdx+1} / ${gList.length}`;
+    gThumbs.querySelectorAll("img").forEach((t,k)=>t.classList.toggle("active",k===gIdx));
+    const act=gThumbs.children[gIdx];if(act)act.scrollIntoView({inline:"center",block:"nearest"});}
+  function gOpen(slug){const p=PROJECTS.find(x=>x.slug===slug);if(!p||!p.gallery||!p.gallery.length)return;
+    gList=p.gallery;gTitle.textContent=p.location?`${p.title} — ${p.location}`:p.title;
+    gThumbs.innerHTML=gList.map((s,k)=>`<img src="${s}" data-k="${k}" alt="">`).join("");
+    gEl.classList.add("open");document.body.style.overflow="hidden";gShow(0);}
+  function gClose(){gEl.classList.remove("open");document.body.style.overflow="";}
+  document.getElementById("gclose").onclick=gClose;
+  document.getElementById("gprev").onclick=()=>gShow(gIdx-1);
+  document.getElementById("gnext").onclick=()=>gShow(gIdx+1);
+  gThumbs.addEventListener("click",e=>{const t=e.target.closest("img");if(t)gShow(+t.dataset.k);});
+  gEl.addEventListener("click",e=>{if(e.target===gEl||e.target.classList.contains("gstage"))gClose();});
+  document.addEventListener("keydown",e=>{if(!gEl.classList.contains("open"))return;
+    if(e.key==="Escape")gClose();if(e.key==="ArrowLeft")gShow(gIdx-1);if(e.key==="ArrowRight")gShow(gIdx+1);});
+
+  function creditLine(p){
+    const parts=[];const add=(l,v)=>{if(v&&v.trim())parts.push(`${l} <span>${esc(v.trim())}</span>`);};
+    add("Architecture",p.architect);add("Interiors",p.interiorDesigner);add("Build",p.builder);add("Photography",p.photographer);
+    return parts.length?`<div class="credits">${parts.join(" &nbsp;·&nbsp; ")}</div>`:"";
+  }
+  function render(projects){
+    PROJECTS=projects;
+    const grid=document.getElementById("archive");
+    grid.innerHTML=projects.map(p=>{
+      const n=(p.gallery||[]).length;
+      return `<article class="pcard reveal" data-project="${esc(p.slug)}">
+        <div class="frame"><img src="${p.lead||(p.gallery&&p.gallery[0])||''}" alt="${esc(p.title)}"></div>
+        <h3>${esc(p.title)}</h3>
+        <div class="loc">${esc(p.location||"")}</div>
+        <div class="desc">${esc(p.description||"")}</div>
+        ${creditLine(p)}
+        <span class="viewall">${n>1?`View all ${n} photos →`:"View project →"}</span>
+      </article>`;
+    }).join("");
+    grid.querySelectorAll(".pcard").forEach(a=>a.addEventListener("click",()=>gOpen(a.dataset.project)));
+    observeReveals();
+  }
+
+  (async function(){
+    try{ const r=await fetch("content/projects.json",{cache:"no-store"}); const d=await r.json();
+      render(d.projects||[]);
+    }catch(e){ document.getElementById("archive").innerHTML="<p style='color:var(--muted)'>Projects couldn't load.</p>"; }
+  })();
+</script>
+</body>
+</html>
