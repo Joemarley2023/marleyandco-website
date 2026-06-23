@@ -26,7 +26,9 @@
   nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
       padding:22px 40px;mix-blend-mode:difference;color:#fff;transition:padding .3s}
   nav.scrolled{padding:14px 40px}
-  nav .wm{font-family:"Fraunces",serif;font-size:20px;letter-spacing:.02em}
+  nav .wm{display:block;width:96px;height:26px;background-color:currentColor;
+    -webkit-mask:url(assets/logo.svg) no-repeat left center;-webkit-mask-size:contain;
+    mask:url(assets/logo.svg) no-repeat left center;mask-size:contain}
   nav .links{display:flex;gap:34px;font-size:13px;letter-spacing:.04em}
   nav .links a{opacity:.85;transition:opacity .2s}nav .links a:hover{opacity:1}
   @media(max-width:760px){nav .links{display:none}nav{padding:18px 22px}}
@@ -206,7 +208,7 @@
 <body>
 
 <nav id="nav">
-  <a class="wm" href="#top">Marley &amp; Co</a>
+  <a class="wm" href="#top" aria-label="Marley &amp; Co — home"></a>
   <div class="links">
     <a href="#work">Work</a>
     <a href="projects.html">Projects</a>
