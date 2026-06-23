@@ -3,64 +3,79 @@
     {
       "title": "Gore St",
       "location": "Alphington, Melbourne",
-      "year": "",
       "slug": "gore",
       "description": "A whole-of-home fit-out in American oak, walnut and stainless steel — joinery detailed to disappear into the architecture.",
       "materials": "American oak, American walnut, stainless steel, travertine, polished concrete",
       "architect": "Olaver Architecture",
-      "interiorDesigner": "",
-      "builder": "",
-      "photographer": "",
-      "instagramHook": "",
-      "lead": "assets/gore-1.jpg",
-      "secondary": ["assets/gore-3.jpg", "assets/gore-4.jpg"],
+      "lead": "/assets/gore-1.jpg",
+      "secondary": [
+        "/assets/gore-3.jpg",
+        "/assets/gore-4.jpg"
+      ],
       "gallery": [
-        "assets/gore/gore-01.jpg", "assets/gore/gore-02.jpg", "assets/gore/gore-03.jpg",
-        "assets/gore/gore-04.jpg", "assets/gore/gore-05.jpg", "assets/gore/gore-06.jpg",
-        "assets/gore/gore-07.jpg", "assets/gore/gore-08.jpg", "assets/gore/gore-09.jpg",
-        "assets/gore/gore-10.jpg", "assets/gore/gore-11.jpg", "assets/gore/gore-12.jpg",
-        "assets/gore/gore-13.jpg", "assets/gore/gore-14.jpg", "assets/gore/gore-15.jpg",
-        "assets/gore/gore-16.jpg", "assets/gore/gore-17.jpg", "assets/gore/gore-18.jpg",
-        "assets/gore/gore-19.jpg", "assets/gore/gore-20.jpg", "assets/gore/gore-21.jpg",
-        "assets/gore/gore-22.jpg"
+        "/assets/gore/gore-01.jpg",
+        "/assets/gore/gore-02.jpg",
+        "/assets/gore/gore-03.jpg",
+        "/assets/gore/gore-04.jpg",
+        "/assets/gore/gore-05.jpg",
+        "/assets/gore/gore-06.jpg",
+        "/assets/gore/gore-07.jpg",
+        "/assets/gore/gore-08.jpg",
+        "/assets/gore/gore-09.jpg",
+        "/assets/gore/gore-10.jpg",
+        "/assets/gore/gore-11.jpg",
+        "/assets/gore/gore-12.jpg",
+        "/assets/gore/gore-13.jpg",
+        "/assets/gore/gore-14.jpg",
+        "/assets/gore/gore-15.jpg",
+        "/assets/gore/gore-16.jpg",
+        "/assets/gore/gore-17.jpg",
+        "/assets/gore/gore-18.jpg",
+        "/assets/gore/gore-19.jpg",
+        "/assets/gore/gore-20.jpg",
+        "/assets/gore/gore-21.jpg",
+        "/assets/gore/gore-22.jpg"
       ]
     },
     {
       "title": "Hartley",
       "location": "Melbourne",
-      "year": "",
       "slug": "hartley",
       "description": "American oak cabinetry around a book-matched marble island, with the same stone carried through to a jewel-box powder room.",
       "materials": "American oak, marble, stainless steel",
       "architect": "Olaver Architecture",
-      "interiorDesigner": "",
-      "builder": "",
-      "photographer": "",
-      "instagramHook": "",
-      "lead": "assets/hartley-1.jpg",
-      "secondary": ["assets/hartley-2.jpg", "assets/hartley-3.jpg"],
+      "builder": "Hyland Built",
+      "photographer": "Tom Ross",
+      "lead": "/assets/hartley-1.jpg",
+      "secondary": [
+        "/assets/hartley-2.jpg",
+        "/assets/hartley-3.jpg"
+      ],
       "gallery": [
-        "assets/hartley/hartley-01.jpg", "assets/hartley/hartley-02.jpg", "assets/hartley/hartley-03.jpg",
-        "assets/hartley/hartley-04.jpg", "assets/hartley/hartley-05.jpg", "assets/hartley/hartley-06.jpg",
-        "assets/hartley/hartley-07.jpg", "assets/hartley/hartley-08.jpg", "assets/hartley/hartley-09.jpg",
-        "assets/hartley/hartley-10.jpg", "assets/hartley/hartley-11.jpg"
+        "/assets/hartley/hartley-01.jpg",
+        "/assets/hartley/hartley-02.jpg",
+        "/assets/hartley/hartley-03.jpg",
+        "/assets/hartley/hartley-04.jpg",
+        "/assets/hartley/hartley-05.jpg",
+        "/assets/hartley/hartley-06.jpg",
+        "/assets/hartley/hartley-07.jpg",
+        "/assets/hartley/hartley-08.jpg",
+        "/assets/hartley/hartley-09.jpg",
+        "/assets/hartley/hartley-10.jpg",
+        "/assets/hartley/hartley-11.jpg"
       ]
     },
     {
       "title": "Cosy Coburg",
       "location": "Coburg, Melbourne",
-      "year": "",
       "slug": "coburg",
       "description": "Vertical timber battening and a fluted, curved island — warmth and texture in a compact family kitchen.",
       "materials": "Timber, stone, terracotta tile",
-      "architect": "",
-      "interiorDesigner": "",
-      "builder": "",
-      "photographer": "",
-      "instagramHook": "",
-      "lead": "assets/coburg-1.jpg",
-      "secondary": [],
-      "gallery": ["assets/coburg/coburg-01.jpg"]
+      "builder": "DC Building ",
+      "lead": "/assets/coburg-1.jpg",
+      "gallery": [
+        "/assets/coburg/coburg-01.jpg"
+      ]
     }
   ]
 }
