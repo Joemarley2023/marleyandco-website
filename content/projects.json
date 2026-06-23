@@ -76,6 +76,9 @@
       "gallery": [
         "/assets/coburg/coburg-01.jpg"
       ]
+    },
+    {
+      "builder": "Joe"
     }
   ]
 }
