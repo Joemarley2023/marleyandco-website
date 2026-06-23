@@ -1,5 +1,14 @@
 {
   "collaborators": [
-    { "name": "Olaver Architecture", "category": "architect", "url": "https://www.olaver.com.au/", "logo": "", "placeholder": false }
+    {
+      "name": "Olaver Architecture",
+      "category": "architect",
+      "placeholder": false
+    },
+    {
+      "name": "Glyde ",
+      "category": "builder",
+      "placeholder": false
+    }
   ]
 }
