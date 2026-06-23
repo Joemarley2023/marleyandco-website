@@ -1,0 +1,101 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where photos you upload in the dashboard are saved
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+site_url: https://marleyandco.com.au
+display_url: https://marleyandco.com.au
+logo_url: https://marleyandco.com.au/assets/hero.jpg
+
+collections:
+  # ---- SITE TEXT ----
+  - name: "settings"
+    label: "Site text"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "general"
+        label: "Homepage text & contact"
+        file: "content/settings.json"
+        fields:
+          - { label: "Hero headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero sub-line", name: "heroSub", widget: "text" }
+          - { label: "Contact email", name: "email", widget: "string" }
+          - { label: "Location line", name: "locationLine", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+
+  # ---- PROJECTS ----
+  - name: "projects"
+    label: "Projects"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "projects"
+        label: "All projects"
+        file: "content/projects.json"
+        fields:
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            label_singular: "Project"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "ID (lowercase, no spaces)", name: "slug", widget: "string", hint: "Used internally, e.g. gore. Keep it unique." }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Lead image", name: "lead", widget: "image" }
+              - { label: "Two detail images (optional)", name: "secondary", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" } }
+              - { label: "Gallery photos", name: "gallery", widget: "list", required: false, field: { label: "Photo", name: "photo", widget: "image" } }
+              - { label: "Architecture credit", name: "architecture", widget: "string", required: false }
+              - { label: "Build credit", name: "build", widget: "string", required: false }
+              - { label: "Photography credit", name: "photography", widget: "string", required: false }
+
+  # ---- TESTIMONIALS ----
+  - name: "testimonials"
+    label: "Testimonials"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "testimonials"
+        label: "All testimonials"
+        file: "content/testimonials.json"
+        fields:
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            label_singular: "Testimonial"
+            summary: "{{fields.name}} — {{fields.practice}}"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Practice / studio", name: "practice", widget: "string" }
+              - { label: "Is this a placeholder?", name: "placeholder", widget: "boolean", default: false, required: false }
+
+  # ---- COLLABORATORS ----
+  - name: "collaborators"
+    label: "Collaborators"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "collaborators"
+        label: "All collaborators"
+        file: "content/collaborators.json"
+        fields:
+          - label: "Collaborators"
+            name: "collaborators"
+            widget: "list"
+            label_singular: "Collaborator"
+            summary: "{{fields.name}} ({{fields.category}})"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["architect", "designer", "builder"] }
+              - { label: "Logo (optional)", name: "logo", widget: "image", required: false }
+              - { label: "Is this a placeholder?", name: "placeholder", widget: "boolean", default: false, required: false }

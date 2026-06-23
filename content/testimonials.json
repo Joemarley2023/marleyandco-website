@@ -1,0 +1,16 @@
+{
+  "testimonials": [
+    {
+      "quote": "Add a real quote from an architect here — about precision, communication, or how the install ran.",
+      "name": "Architect name",
+      "practice": "Practice",
+      "placeholder": true
+    },
+    {
+      "quote": "A second quote, ideally from an interior designer or builder you've worked with.",
+      "name": "Designer name",
+      "practice": "Studio",
+      "placeholder": true
+    }
+  ]
+}

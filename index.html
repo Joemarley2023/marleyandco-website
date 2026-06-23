@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marley &amp; Co — Bespoke Joinery, Melbourne</title>
+<meta name="description" content="Marley & Co Custom Cabinetry — bespoke joinery and architectural cabinetry in Melbourne. Working with architects, designers and builders on high-end residential homes." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1a17; --paper:#f4f1ea; --paper2:#ece7dd; --line:#d8d1c4;
+    --bronze:#8a6d4b; --muted:#7c7568; --maxw:1280px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",sans-serif;color:var(--ink);background:var(--paper);
+       font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.disp{font-family:"Fraunces",serif;font-weight:400;line-height:1.08;letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze);font-weight:500}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+      padding:22px 40px;mix-blend-mode:difference;color:#fff;transition:padding .3s}
+  nav.scrolled{padding:14px 40px}
+  nav .wm{font-family:"Fraunces",serif;font-size:20px;letter-spacing:.02em}
+  nav .links{display:flex;gap:34px;font-size:13px;letter-spacing:.04em}
+  nav .links a{opacity:.85;transition:opacity .2s}nav .links a:hover{opacity:1}
+  @media(max-width:760px){nav .links{display:none}nav{padding:18px 22px}}
+
+  /* hero */
+  .hero{position:relative;height:100vh;min-height:620px;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.05);
+            animation:heroIn 8s ease forwards}
+  @keyframes heroIn{to{transform:scale(1)}}
+  .hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.05) 40%,rgba(0,0,0,.45))}
+  .hero .inner{position:absolute;left:0;right:0;bottom:9vh;padding:0 40px;color:#fff}
+  .hero h1{font-size:clamp(38px,6.4vw,86px);max-width:14ch;font-weight:400}
+  .hero .sub{margin-top:22px;font-size:clamp(15px,1.5vw,19px);max-width:46ch;opacity:.92;font-weight:300}
+  .hero .cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);color:#fff;font-size:12px;
+             letter-spacing:.2em;opacity:.8;animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{50%{transform:translate(-50%,7px)}}
+  @media(max-width:760px){.hero .inner{padding:0 22px;bottom:12vh}}
+
+  section{padding:120px 40px}
+  .wrap{max-width:var(--maxw);margin:0 auto}
+  @media(max-width:760px){section{padding:78px 22px}}
+
+  /* statement */
+  .statement{background:var(--paper)}
+  .statement .lead{font-family:"Fraunces",serif;font-size:clamp(24px,3.1vw,40px);line-height:1.28;max-width:24ch;font-weight:400}
+  .statement .grid2{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:14px;align-items:end}
+  .statement p.body{font-size:16px;color:var(--muted);max-width:48ch}
+  @media(max-width:760px){.statement .grid2{grid-template-columns:1fr;gap:26px}}
+
+  /* work */
+  .work{background:var(--paper2)}
+  .work .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:12px}
+  .work h2{font-size:clamp(30px,4vw,52px)}
+  .project{margin-bottom:96px}
+  .project:last-child{margin-bottom:0}
+  .project .frame{overflow:hidden;background:#ddd}
+  .project .frame img{width:100%;height:62vh;min-height:380px;object-fit:cover;transition:transform 1.2s ease}
+  .project:hover .frame img{transform:scale(1.04)}
+  .project .meta{display:flex;justify-content:space-between;align-items:flex-start;margin-top:20px;gap:24px;flex-wrap:wrap}
+  .project .meta h3{font-size:clamp(22px,2.4vw,32px)}
+  .project .meta .loc{color:var(--bronze);font-size:13px;letter-spacing:.04em;margin-top:6px}
+  .project .meta .desc{max-width:40ch;color:var(--muted);font-size:15px}
+  .project .credits{margin-top:14px;font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .project .credits span{color:var(--ink)}
+  .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .subgrid img{width:100%;height:46vh;min-height:300px;object-fit:cover}
+  @media(max-width:760px){.subgrid{grid-template-columns:1fr}.project .frame img{height:52vh}}
+
+  /* approach */
+  .approach{background:var(--ink);color:var(--paper)}
+  .approach .eyebrow{color:#c9a87e}
+  .approach h2{font-size:clamp(28px,3.6vw,46px);max-width:18ch;margin:14px 0 60px}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+  .pillars .num{font-family:"Fraunces",serif;font-size:30px;color:#c9a87e;opacity:.6}
+  .pillars h3{font-size:21px;margin:14px 0 10px}
+  .pillars p{color:#b8b1a4;font-size:15px}
+  @media(max-width:760px){.pillars{grid-template-columns:1fr;gap:34px}}
+
+  /* testimonials */
+  .voices{background:var(--paper)}
+  .voices .eyebrow{margin-bottom:14px}
+  .voices h2{font-size:clamp(26px,3.2vw,42px);margin-bottom:54px;max-width:20ch}
+  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  .quote{border-top:1px solid var(--line);padding-top:24px}
+  .quote .q{font-family:"Fraunces",serif;font-size:21px;line-height:1.42;font-weight:400}
+  .quote .by{margin-top:18px;font-size:13px;color:var(--muted);letter-spacing:.03em}
+  .quote .by b{color:var(--ink);font-weight:500}
+  .ph{outline:1px dashed var(--bronze);outline-offset:4px}
+  .ph::after{content:"PLACEHOLDER — replace with a real quote";display:block;margin-top:10px;font-size:10px;
+             letter-spacing:.18em;text-transform:uppercase;color:var(--bronze);font-family:"Inter"}
+  @media(max-width:760px){.quotes{grid-template-columns:1fr;gap:22px}}
+
+  /* collaborators */
+  .collab{background:var(--paper2);text-align:center}
+  .collab .eyebrow{margin-bottom:26px}
+  .collab .row{display:flex;flex-wrap:wrap;justify-content:center;gap:18px 46px;font-family:"Fraunces",serif;
+               font-size:clamp(18px,2vw,26px);color:var(--muted)}
+  .collab .row span.live{color:var(--ink)}
+
+  /* contact */
+  .contact{background:var(--ink);color:var(--paper)}
+  .contact .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:start}
+  .contact .eyebrow{color:#c9a87e}
+  .contact h2{font-size:clamp(34px,5vw,68px);margin:14px 0 26px;font-weight:400}
+  .contact p{color:#b8b1a4;max-width:38ch;font-size:16px}
+  .contact .det{margin-top:30px;font-size:15px;line-height:2}
+  .contact .det a{border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px}
+  form{display:grid;gap:14px}
+  form input,form textarea{background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.25);
+    color:#fff;font-family:"Inter";font-size:15px;padding:12px 2px;font-weight:300}
+  form input::placeholder,form textarea::placeholder{color:#8e887b}
+  form input:focus,form textarea:focus{outline:none;border-color:#c9a87e}
+  form button{justify-self:start;margin-top:14px;background:var(--paper);color:var(--ink);border:none;
+    padding:15px 38px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:"Inter";transition:opacity .2s}
+  form button:hover{opacity:.85}
+  /* qualifying form */
+  .contact .lead-col{position:sticky;top:104px;align-self:start}
+  .grp{margin-top:6px}
+  .lbl{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#c9a87e;margin-bottom:11px;font-weight:500}
+  .lbl .opt-note{opacity:.5;letter-spacing:.02em;text-transform:none}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  select{appearance:none;-webkit-appearance:none;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.25);
+    color:#fff;font-family:"Inter";font-size:15px;padding:12px 2px;font-weight:300;width:100%;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%23c9a87e' fill='none' stroke-width='1.4'/></svg>");
+    background-repeat:no-repeat;background-position:right 4px center}
+  select:focus{outline:none;border-color:#c9a87e}
+  select option{color:#1c1a17}
+  .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt label{display:inline-block;border:1px solid rgba(255,255,255,.28);padding:9px 17px;border-radius:30px;
+    font-size:13.5px;cursor:pointer;color:#cdc7ba;transition:all .15s;font-weight:300}
+  .opt label:hover{border-color:#c9a87e}
+  .opt input:checked+label{background:#c9a87e;border-color:#c9a87e;color:#1c1a17}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#b8b1a4;margin-top:12px;cursor:pointer;font-weight:300}
+  .check input{margin-top:3px;accent-color:#c9a87e}
+  .drop{border:1px dashed rgba(255,255,255,.3);border-radius:12px;padding:22px;text-align:center;color:#b8b1a4;
+    font-size:14px;cursor:pointer;transition:border-color .2s}
+  .drop:hover{border-color:#c9a87e}
+  .drop .plus{font-size:22px;color:#c9a87e;display:block;margin-bottom:6px}
+  .drop #fname{display:block;margin-top:8px;font-size:12.5px;color:#fff}
+  .fnote{font-size:12.5px;color:#8e887b;margin-top:6px}
+  .formstatus{display:none;background:#c9a87e;color:#1c1a17;padding:16px 20px;border-radius:10px;font-size:15px}
+  @media(max-width:760px){.contact .grid2{grid-template-columns:1fr;gap:40px}.contact .lead-col{position:static}.row2{grid-template-columns:1fr}}
+
+  /* project gallery lightbox */
+  .project .frame,.subgrid img{cursor:zoom-in}
+  .viewall{margin-top:14px;background:none;border:none;color:var(--bronze);font-family:"Inter";font-size:13px;
+    letter-spacing:.04em;cursor:pointer;padding:0}
+  .viewall:hover{opacity:.7}
+  .gallery{position:fixed;inset:0;z-index:90;background:rgba(20,18,15,.97);display:none;flex-direction:column}
+  .gallery.open{display:flex}
+  .gtop{display:flex;align-items:center;gap:16px;padding:18px 26px;color:#f4f1ea;font-family:"Fraunces",serif}
+  .gtop #gtitle{font-size:20px}
+  .gtop #gcount{font-family:"Inter";font-size:13px;color:#b8b1a4;letter-spacing:.05em}
+  .gtop #gclose{margin-left:auto;background:none;border:none;color:#f4f1ea;font-size:30px;cursor:pointer;line-height:1}
+  .gstage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:0 70px}
+  #gimg{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 10px 50px rgba(0,0,0,.5)}
+  .gnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:#fff;
+    width:48px;height:48px;border-radius:50%;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .gnav:hover{background:rgba(255,255,255,.22)}
+  .gprev{left:18px}.gnext{right:18px}
+  .gthumbs{display:flex;gap:8px;padding:14px 26px;overflow-x:auto;justify-content:flex-start}
+  .gthumbs img{height:62px;width:84px;object-fit:cover;opacity:.4;cursor:pointer;transition:opacity .2s;flex:0 0 auto;border-radius:3px}
+  .gthumbs img.active,.gthumbs img:hover{opacity:1}
+  @media(max-width:760px){.gstage{padding:0 10px}.gnav{width:38px;height:38px;font-size:20px}.gthumbs img{height:44px;width:60px}}
+
+  /* collaborators grid (Mood-style) */
+  .collab2{background:var(--paper2)}
+  .collab2 h2{font-size:clamp(28px,3.4vw,44px);margin-top:12px}
+  .collab2 .intro{max-width:62ch;color:var(--muted);font-size:16px;margin-top:16px}
+  .cfilters{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 30px}
+  .cfilters button{background:none;border:1px solid var(--line);border-radius:30px;padding:8px 18px;font-family:"Inter";
+    font-size:13px;cursor:pointer;color:var(--muted);transition:all .15s}
+  .cfilters button.active,.cfilters button:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .ctile{aspect-ratio:3/2;border:1px solid var(--line);border-radius:10px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:14px;background:var(--paper);
+    font-family:"Fraunces",serif;font-size:18px;color:var(--ink);transition:all .2s;line-height:1.15}
+  .ctile:hover{border-color:var(--bronze);transform:translateY(-2px)}
+  .ctile.ph2{color:var(--muted);font-family:"Inter";font-size:14px;font-style:italic}
+  .ctile small{font-family:"Inter";font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bronze);margin-top:8px;font-style:normal}
+  @media(max-width:980px){.cgrid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:560px){.cgrid{grid-template-columns:repeat(2,1fr)}}
+
+  footer{background:var(--ink);color:#8e887b;border-top:1px solid rgba(255,255,255,.1);
+         padding:30px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;letter-spacing:.03em}
+  footer a:hover{color:#fff}
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="wm" href="#top">Marley &amp; Co</a>
+  <div class="links">
+    <a href="#work">Work</a>
+    <a href="#approach">Approach</a>
+    <a href="#voices">Studio</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <img src="assets/hero.jpg" alt="Gore St joinery by Marley & Co">
+  <div class="scrim"></div>
+  <div class="inner">
+    <h1 id="heroH">Bespoke joinery for considered homes.</h1>
+    <p class="sub" id="heroSub">Marley &amp; Co is a Melbourne joinery studio, working alongside architects, designers and builders to make the cabinetry that defines a high-end home.</p>
+  </div>
+  <div class="cue">SCROLL</div>
+</header>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap reveal">
+    <div class="eyebrow">Custom Cabinetry &amp; Architectural Joinery</div>
+    <div class="grid2">
+      <p class="lead">We build the quiet detail that makes a room feel resolved.</p>
+      <p class="body">From a single book-matched panel to a whole-of-home fit-out, our work is made to sit within an architect's vision — not compete with it. Considered, precise, and built to last decades.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Selected work</h2>
+      <div class="eyebrow">Melbourne · Residential</div>
+    </div>
+
+    <div id="workgrid"></div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="wrap reveal">
+    <div class="eyebrow">Approach</div>
+    <h2>A maker that architects and designers trust to get it right.</h2>
+    <div class="pillars">
+      <div>
+        <div class="num">01</div>
+        <h3>Collaboration</h3>
+        <p>We work from the drawings, in the language of the studio — solving the hard junctions early so the install runs clean.</p>
+      </div>
+      <div>
+        <div class="num">02</div>
+        <h3>Craft</h3>
+        <p>Every edge, grain and join is considered. Book-matched veneers, flush detailing, soft-close everything — finished to a standard you can feel.</p>
+      </div>
+      <div>
+        <div class="num">03</div>
+        <h3>Materials</h3>
+        <p>American oak and walnut, natural stone, travertine, brushed metals. Honest materials, chosen to age gracefully.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES / TESTIMONIALS -->
+<section class="voices" id="voices">
+  <div class="wrap reveal">
+    <div class="eyebrow">From the studios we work with</div>
+    <h2>The work speaks — so do our collaborators.</h2>
+    <div class="quotes" id="quotes"></div>
+  </div>
+</section>
+
+<!-- COLLABORATORS -->
+<section class="collab2" id="collaborators">
+  <div class="wrap reveal">
+    <div class="eyebrow">Collaborators</div>
+    <h2>The studios we build with.</h2>
+    <p class="intro">We're lucky to work alongside some seriously good people — architects, designers and builders who share our love of well-made things. They bring the vision; we bring the craft. It's a partnership we don't take for granted.</p>
+    <div class="cfilters">
+      <button class="active" data-f="all">All</button>
+      <button data-f="architect">Architects</button>
+      <button data-f="designer">Designers</button>
+      <button data-f="builder">Builders</button>
+    </div>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap grid2">
+    <div class="lead-col reveal">
+      <div class="eyebrow">Enquire</div>
+      <h2>Let's talk.</h2>
+      <p>Collaborating with <b style="color:#c9a87e">architects</b>, <b style="color:#c9a87e">designers</b> and <b style="color:#c9a87e">builders</b> on exceptional residential spaces. Tell us about the project and we'll be in touch.</p>
+      <div class="det">
+        <a id="cEmail" href="mailto:joe@marleyandco.com.au">joe@marleyandco.com.au</a><br>
+        <span id="cLoc">Northcote, Melbourne · By appointment</span><br>
+        <a id="cIg" href="https://instagram.com/" target="_blank">Instagram →</a>
+      </div>
+    </div>
+
+    <form class="reveal" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" id="enquiry">
+      <input type="hidden" name="form-name" value="enquiry">
+      <p style="display:none"><label>Leave blank: <input name="bot-field"></label></p>
+
+      <div class="grp">
+        <label class="lbl">Name <span class="opt-note">(required)</span></label>
+        <div class="row2">
+          <input type="text" name="first-name" placeholder="First name" required>
+          <input type="text" name="last-name" placeholder="Last name" required>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Phone <span class="opt-note">(required)</span></label>
+        <input type="tel" name="phone" placeholder="Phone" required>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Email <span class="opt-note">(required)</span></label>
+        <input type="email" name="email" placeholder="Email" required>
+        <label class="check"><input type="checkbox" name="newsletter"> Sign up for occasional project news</label>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Project location <span class="opt-note">(suburb or address)</span></label>
+        <input type="text" name="location" placeholder="Suburb or address">
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Your role <span class="opt-note">(required)</span></label>
+        <div class="opts">
+          <span class="opt"><input type="radio" id="r1" name="role" value="Architect / Designer" required><label for="r1">Architect / Designer</label></span>
+          <span class="opt"><input type="radio" id="r2" name="role" value="Builder"><label for="r2">Builder</label></span>
+          <span class="opt"><input type="radio" id="r3" name="role" value="Homeowner"><label for="r3">Homeowner</label></span>
+          <span class="opt"><input type="radio" id="r4" name="role" value="Other"><label for="r4">Other</label></span>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Project type</label>
+        <div class="opts">
+          <span class="opt"><input type="radio" id="t1" name="project-type" value="New build"><label for="t1">New build</label></span>
+          <span class="opt"><input type="radio" id="t2" name="project-type" value="Renovation / extension"><label for="t2">Renovation / extension</label></span>
+          <span class="opt"><input type="radio" id="t3" name="project-type" value="Single room / piece"><label for="t3">Single room / piece</label></span>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Indicative joinery budget</label>
+        <div class="opts">
+          <span class="opt"><input type="radio" id="b1" name="budget" value="Under $50k"><label for="b1">Under $50k</label></span>
+          <span class="opt"><input type="radio" id="b2" name="budget" value="$50k–$100k"><label for="b2">$50k–$100k</label></span>
+          <span class="opt"><input type="radio" id="b3" name="budget" value="$100k–$250k"><label for="b3">$100k–$250k</label></span>
+          <span class="opt"><input type="radio" id="b4" name="budget" value="$250k+"><label for="b4">$250k+</label></span>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Current project stage</label>
+        <div class="opts">
+          <span class="opt"><input type="radio" id="s1" name="stage" value="Concept / pre-design"><label for="s1">Concept / pre-design</label></span>
+          <span class="opt"><input type="radio" id="s2" name="stage" value="Documentation / tender"><label for="s2">Documentation / tender</label></span>
+          <span class="opt"><input type="radio" id="s3" name="stage" value="Builder appointed / on site"><label for="s3">Builder appointed / on site</label></span>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Indicative installation date</label>
+        <div class="opts">
+          <span class="opt"><input type="radio" id="i1" name="install" value="Within 6 months"><label for="i1">Within 6 months</label></span>
+          <span class="opt"><input type="radio" id="i2" name="install" value="6–12 months"><label for="i2">6–12 months</label></span>
+          <span class="opt"><input type="radio" id="i3" name="install" value="12+ months"><label for="i3">12+ months</label></span>
+        </div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">When do you need a quote by?</label>
+        <input type="date" name="quote-by" style="color-scheme:dark">
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Message</label>
+        <textarea name="message" rows="4" placeholder="A few lines about the project"></textarea>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">Project documentation</label>
+        <label class="drop" for="file">
+          <span class="plus">＋</span>
+          Add plans, drawings or reference images
+          <span id="fname"></span>
+        </label>
+        <input type="file" id="file" name="documents" multiple style="display:none">
+        <div class="fnote">Architectural drawings or a Pinterest/reference set help us quote accurately.</div>
+      </div>
+
+      <div class="grp">
+        <label class="lbl">How did you hear about us?</label>
+        <select name="referral">
+          <option value="">Select an option</option>
+          <option>Instagram</option>
+          <option>Architect or designer referral</option>
+          <option>Builder referral</option>
+          <option>A past client</option>
+          <option>Google search</option>
+          <option>Saw one of our projects</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <button type="submit">Send enquiry</button>
+      <div class="formstatus" id="formstatus">Thanks — we've received your enquiry and will be in touch shortly.</div>
+    </form>
+  </div>
+</section>
+
+<!-- PROJECT GALLERY -->
+<div class="gallery" id="gallery">
+  <div class="gtop"><span id="gtitle"></span><span id="gcount"></span><button id="gclose" aria-label="Close">&times;</button></div>
+  <div class="gstage">
+    <button class="gnav gprev" id="gprev" aria-label="Previous">‹</button>
+    <img id="gimg" src="" alt="">
+    <button class="gnav gnext" id="gnext" aria-label="Next">›</button>
+  </div>
+  <div class="gthumbs" id="gthumbs"></div>
+</div>
+
+<footer>
+  <span>© Marley &amp; Co Custom Cabinetry · Melbourne</span>
+  <span><a href="#top">Back to top ↑</a></span>
+</footer>
+
+<script>
+  // nav shrink
+  const nav=document.getElementById("nav");
+  addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>40));
+
+  // scroll reveal (re-runnable for content rendered after load)
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.12});
+  function observeReveals(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el));}
+  observeReveals();
+
+  // show chosen file names
+  const fileInput=document.getElementById("file");
+  if(fileInput){fileInput.addEventListener("change",function(){
+    const names=Array.from(this.files).map(f=>f.name);
+    document.getElementById("fname").textContent=names.length?names.join(", "):"";
+  });}
+
+  // enquiry submit: posts to Netlify Forms when live; graceful thank-you in local preview
+  const form=document.getElementById("enquiry");
+  if(form){form.addEventListener("submit",async function(e){
+    e.preventDefault();
+    if(!form.reportValidity())return;
+    const status=document.getElementById("formstatus");
+    if(location.protocol.startsWith("http")){try{await fetch("/",{method:"POST",body:new FormData(form)});}catch(err){}}
+    form.parentNode.appendChild(status);
+    form.style.display="none";status.style.display="block";
+    status.scrollIntoView({behavior:"smooth",block:"center"});
+  });}
+
+  // ---------- gallery (data-driven) ----------
+  let PROJECTS=[];
+  const gEl=document.getElementById("gallery"),gImg=document.getElementById("gimg"),
+        gThumbs=document.getElementById("gthumbs"),gTitle=document.getElementById("gtitle"),gCount=document.getElementById("gcount");
+  let gList=[],gIdx=0;
+  function gShow(i){if(!gList.length)return;gIdx=(i+gList.length)%gList.length;gImg.src=gList[gIdx];
+    gCount.textContent=`${gIdx+1} / ${gList.length}`;
+    gThumbs.querySelectorAll("img").forEach((t,k)=>t.classList.toggle("active",k===gIdx));
+    const act=gThumbs.children[gIdx];if(act)act.scrollIntoView({inline:"center",block:"nearest"});}
+  function gOpen(slug){const p=PROJECTS.find(x=>x.slug===slug);if(!p||!p.gallery||!p.gallery.length)return;
+    gList=p.gallery;gTitle.textContent=p.location?`${p.title} — ${p.location}`:p.title;
+    gThumbs.innerHTML=gList.map((s,k)=>`<img src="${s}" data-k="${k}" alt="">`).join("");
+    gEl.classList.add("open");document.body.style.overflow="hidden";gShow(0);}
+  function gClose(){gEl.classList.remove("open");document.body.style.overflow="";}
+  document.getElementById("gclose").onclick=gClose;
+  document.getElementById("gprev").onclick=()=>gShow(gIdx-1);
+  document.getElementById("gnext").onclick=()=>gShow(gIdx+1);
+  gThumbs.addEventListener("click",e=>{const t=e.target.closest("img");if(t)gShow(+t.dataset.k);});
+  gEl.addEventListener("click",e=>{if(e.target===gEl||e.target.classList.contains("gstage"))gClose();});
+  document.addEventListener("keydown",e=>{if(!gEl.classList.contains("open"))return;
+    if(e.key==="Escape")gClose();if(e.key==="ArrowLeft")gShow(gIdx-1);if(e.key==="ArrowRight")gShow(gIdx+1);});
+
+  // ---------- render from content files ----------
+  function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function cred(v,ph){return v&&v.trim()?`<span>${esc(v)}</span>`:`<span>[ ${ph} ]</span>`;}
+
+  function renderWork(projects){
+    PROJECTS=projects;
+    const grid=document.getElementById("workgrid");
+    grid.innerHTML=projects.map(p=>{
+      const n=(p.gallery||[]).length;
+      const viewLabel=n>1?`View all ${n} photos →`:"View project →";
+      const sub=(p.secondary&&p.secondary.length)
+        ?`<div class="subgrid">${p.secondary.map(s=>`<img src="${s}" alt="${esc(p.title)} detail">`).join("")}</div>`:"";
+      return `<article class="project reveal" data-project="${esc(p.slug)}">
+        <div class="frame"><img src="${p.lead}" alt="${esc(p.title)}"></div>
+        <div class="meta">
+          <div><h3>${esc(p.title)}</h3><div class="loc">${esc(p.location)}</div>
+            <button class="viewall" type="button">${viewLabel}</button></div>
+          <div class="desc">${esc(p.description)}</div>
+        </div>
+        ${sub}
+        <div class="credits">Architecture ${cred(p.architecture,"architect")} &nbsp;·&nbsp; Build ${cred(p.build,"builder")} &nbsp;·&nbsp; Photography ${cred(p.photography,"photographer")}</div>
+      </article>`;
+    }).join("");
+    grid.querySelectorAll(".project").forEach(a=>{
+      const slug=a.dataset.project;
+      a.querySelectorAll(".frame,.subgrid img,.viewall").forEach(el=>el.addEventListener("click",()=>gOpen(slug)));
+    });
+  }
+
+  function renderTestimonials(items){
+    document.getElementById("quotes").innerHTML=(items||[]).map(t=>
+      `<div class="quote ${t.placeholder?"ph":""}"><div class="q">“${esc(t.quote)}”</div>
+       <div class="by"><b>${esc(t.name)}</b> · ${esc(t.practice)}</div></div>`).join("");
+  }
+
+  const catLabel={architect:"Architect",designer:"Designer",builder:"Builder"};
+  let COLLAB=[];
+  function renderCollab(f){
+    document.getElementById("cgrid").innerHTML=COLLAB.filter(c=>f==="all"||c.category===f).map(c=>{
+      const inner=c.logo?`<img src="${c.logo}" alt="${esc(c.name)}" style="max-height:46px;max-width:80%;object-fit:contain">`
+                        :(c.placeholder?"+ "+esc(c.name):esc(c.name));
+      return `<div class="ctile ${c.placeholder&&!c.logo?"ph2":""}">${inner}<small>${catLabel[c.category]||""}</small></div>`;
+    }).join("");
+  }
+  function wireCollabFilters(){
+    document.querySelectorAll(".cfilters button").forEach(b=>b.onclick=()=>{
+      document.querySelectorAll(".cfilters button").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");renderCollab(b.dataset.f);
+    });
+  }
+
+  function applySettings(s){
+    if(!s)return;
+    const set=(id,v,fn)=>{const el=document.getElementById(id);if(el&&v)fn(el,v);};
+    set("heroH",s.heroHeadline,(e,v)=>e.textContent=v);
+    set("heroSub",s.heroSub,(e,v)=>e.textContent=v);
+    set("cEmail",s.email,(e,v)=>{e.textContent=v;e.href="mailto:"+v;});
+    set("cLoc",s.locationLine,(e,v)=>e.textContent=v);
+    set("cIg",s.instagram,(e,v)=>e.href=v);
+  }
+
+  async function getJSON(p){const r=await fetch(p,{cache:"no-store"});return r.json();}
+  (async function loadContent(){
+    try{
+      const [s,p,t,c]=await Promise.all([
+        getJSON("content/settings.json"),getJSON("content/projects.json"),
+        getJSON("content/testimonials.json"),getJSON("content/collaborators.json")]);
+      applySettings(s);
+      renderWork(p.projects||[]);
+      renderTestimonials(t.testimonials||[]);
+      COLLAB=c.collaborators||[];renderCollab("all");wireCollabFilters();
+      observeReveals();
+    }catch(err){console.warn("Content failed to load — open via the local server (node server.js) or the live site, not file://",err);}
+  })();
+</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if(window.netlifyIdentity){window.netlifyIdentity.on("init",u=>{if(!u){window.netlifyIdentity.on("login",()=>{document.location.href="/admin/";});}});}
+</script>
+</body>
+</html>
