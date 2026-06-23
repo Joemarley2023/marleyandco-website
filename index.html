@@ -284,6 +284,7 @@
       <button data-f="architect">Architects</button>
       <button data-f="designer">Designers</button>
       <button data-f="builder">Builders</button>
+      <button data-f="photographer">Photographers</button>
     </div>
     <div class="cgrid" id="cgrid"></div>
   </div>
@@ -488,7 +489,15 @@
 
   // ---------- render from content files ----------
   function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-  function cred(v,ph){return v&&v.trim()?`<span>${esc(v)}</span>`:`<span>[ ${ph} ]</span>`;}
+  function creditLine(p){
+    const parts=[];
+    const add=(label,v)=>{if(v&&v.trim())parts.push(`${label} <span>${esc(v.trim())}</span>`);};
+    add("Architecture",p.architect);
+    add("Interiors",p.interiorDesigner);
+    add("Build",p.builder);
+    add("Photography",p.photographer);
+    return parts.length?`<div class="credits">${parts.join(" &nbsp;·&nbsp; ")}</div>`:"";
+  }
 
   function renderWork(projects){
     PROJECTS=projects;
@@ -506,7 +515,7 @@
           <div class="desc">${esc(p.description)}</div>
         </div>
         ${sub}
-        <div class="credits">Architecture ${cred(p.architecture,"architect")} &nbsp;·&nbsp; Build ${cred(p.build,"builder")} &nbsp;·&nbsp; Photography ${cred(p.photography,"photographer")}</div>
+        ${creditLine(p)}
       </article>`;
     }).join("");
     grid.querySelectorAll(".project").forEach(a=>{
@@ -522,14 +531,28 @@
        <div class="by"><b>${esc(t.name)}</b> · ${esc(t.practice)}</div></div>`).join("");
   }
 
-  const catLabel={architect:"Architect",designer:"Designer",builder:"Builder"};
-  let COLLAB=[];
+  const catLabel={architect:"Architect",designer:"Designer",builder:"Builder",photographer:"Photographer"};
+  let COLLAB_MANUAL=[],COLLAB=[];
+  // auto-build collaborators: manual entries (with logos) + everyone credited on a project, de-duplicated by name
+  function deriveCollaborators(){
+    const map=new Map();
+    COLLAB_MANUAL.forEach(c=>{if(c&&c.name&&c.name.trim())map.set(c.name.trim().toLowerCase(),
+      {name:c.name.trim(),category:c.category||"designer",logo:c.logo||"",placeholder:!!c.placeholder});});
+    const roles=[["architect","architect"],["interiorDesigner","designer"],["builder","builder"],["photographer","photographer"]];
+    PROJECTS.forEach(p=>roles.forEach(([field,cat])=>{
+      const v=(p[field]||"").trim();if(!v)return;
+      const k=v.toLowerCase();if(!map.has(k))map.set(k,{name:v,category:cat,logo:"",placeholder:false});
+    }));
+    return [...map.values()];
+  }
   function renderCollab(f){
-    document.getElementById("cgrid").innerHTML=COLLAB.filter(c=>f==="all"||c.category===f).map(c=>{
+    const grid=document.getElementById("cgrid");if(!grid)return;
+    const list=COLLAB.filter(c=>f==="all"||c.category===f);
+    grid.innerHTML=list.length?list.map(c=>{
       const inner=c.logo?`<img src="${c.logo}" alt="${esc(c.name)}" style="max-height:46px;max-width:80%;object-fit:contain">`
                         :(c.placeholder?"+ "+esc(c.name):esc(c.name));
       return `<div class="ctile ${c.placeholder&&!c.logo?"ph2":""}">${inner}<small>${catLabel[c.category]||""}</small></div>`;
-    }).join("");
+    }).join(""):`<div class="ctile ph2" style="grid-column:1/-1">Credit a studio on a project and they appear here automatically</div>`;
   }
   function wireCollabFilters(){
     document.querySelectorAll(".cfilters button").forEach(b=>b.onclick=()=>{
@@ -557,7 +580,7 @@
     if(s)applySettings(s);
     renderWork((p&&p.projects)||[]);
     renderTestimonials((t&&t.testimonials)||[]);
-    COLLAB=(c&&c.collaborators)||[];renderCollab("all");wireCollabFilters();
+    COLLAB_MANUAL=(c&&c.collaborators)||[];COLLAB=deriveCollaborators();renderCollab("all");wireCollabFilters();
     observeReveals();
   })();
 </script>

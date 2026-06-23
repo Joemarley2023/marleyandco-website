@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Marley &amp; Co — Studio Tools (internal)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1c1a17;--paper:#f4f1ea;--paper2:#ece7dd;--line:#d8d1c4;--bronze:#8a6d4b;--muted:#7c7568}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Inter",sans-serif;background:var(--paper);color:var(--ink);font-weight:300;line-height:1.5;padding:40px 20px 80px}
+  .wrap{max-width:1100px;margin:0 auto}
+  h1{font-family:"Fraunces",serif;font-weight:400;font-size:30px;margin-bottom:6px}
+  .lede{color:var(--muted);font-size:14px;margin-bottom:8px}
+  .bar{font-size:12px;color:var(--bronze);letter-spacing:.1em;text-transform:uppercase;margin-bottom:30px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:26px;display:grid;
+        grid-template-columns:200px 1fr;gap:24px}
+  .card img.lead{width:100%;height:150px;object-fit:cover;border-radius:8px}
+  .card .pname{font-family:"Fraunces",serif;font-size:22px;margin-bottom:2px}
+  .card .ploc{color:var(--bronze);font-size:12px;letter-spacing:.04em;margin-bottom:14px}
+  .gallerycount{font-size:12px;color:var(--muted);margin-top:10px}
+  textarea{width:100%;min-height:230px;border:1px solid var(--line);border-radius:8px;padding:14px;font-family:"Inter";
+           font-size:14px;line-height:1.55;color:var(--ink);background:var(--paper);resize:vertical}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  button{font-family:"Inter";font-size:13px;font-weight:500;border:none;border-radius:8px;padding:10px 18px;cursor:pointer;
+         background:var(--ink);color:var(--paper);transition:opacity .2s}
+  button:hover{opacity:.85}
+  button.ghost{background:none;border:1px solid var(--line);color:var(--ink)}
+  .copied{color:#2e7d32;font-size:13px;font-weight:500}
+  .flags{margin-top:12px;font-size:13px}
+  .flags .ok{color:#2e7d32}.flags .miss{color:#b23c1e}
+  .tags-todo{margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .tags-todo b{color:var(--ink);font-weight:500}
+  @media(max-width:680px){.card{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Studio Tools</h1>
+  <div class="lede">Internal page — reads your project data and generates Instagram captions automatically. Not linked from the public site.</div>
+  <div class="bar">Instagram caption generator</div>
+  <div id="cards">Loading projects…</div>
+</div>
+
+<script>
+const BASE=["#customcabinetry","#bespokejoinery","#architecturaljoinery","#joinery","#cabinetmaker","#melbournearchitecture","#interiordesignmelbourne","#timberjoinery","#madeinmelbourne","#residentialdesign"];
+const MATERIAL_TAGS={oak:"#americanoak",walnut:"#americanwalnut",marble:"#marble",travertine:"#travertine",stainless:"#stainlesssteelkitchen",timber:"#timberveneer",stone:"#naturalstone",terracotta:"#terracottatile",concrete:"#polishedconcrete",brass:"#brasstapware"};
+
+function hashtagsFor(p){
+  const tags=new Set(BASE);
+  const mat=(p.materials||"").toLowerCase();
+  Object.keys(MATERIAL_TAGS).forEach(k=>{if(mat.includes(k))tags.add(MATERIAL_TAGS[k]);});
+  return [...tags].join(" ");
+}
+function captionFor(p){
+  const hook=(p.instagramHook&&p.instagramHook.trim())?p.instagramHook.trim():(p.description||"").trim();
+  const L=[hook,""];
+  let meta=p.title||"";
+  if(p.location)meta+=" · "+p.location;
+  if(p.materials)meta+=" · "+p.materials;
+  L.push(meta);
+  const creds=[];
+  if(p.architect)creds.push("Architecture: "+p.architect);
+  if(p.interiorDesigner)creds.push("Interiors: "+p.interiorDesigner);
+  if(p.builder)creds.push("Build: "+p.builder);
+  if(p.photographer)creds.push("Photography: "+p.photographer);
+  if(creds.length){L.push("");L.push(creds.join(" · "));}
+  L.push("");L.push(hashtagsFor(p));
+  return L.join("\n");
+}
+function flagsFor(p){
+  const roles=[["Architect","architect"],["Interior designer","interiorDesigner"],["Builder","builder"],["Photographer","photographer"]];
+  return roles.map(([label,f])=>{
+    const has=p[f]&&p[f].trim();
+    return `<span class="${has?'ok':'miss'}">${has?'✓':'✗'} ${label}</span>`;
+  }).join(" &nbsp; ");
+}
+function tagsTodo(p){
+  const names=[p.architect,p.interiorDesigner,p.builder,p.photographer].filter(v=>v&&v.trim());
+  if(!names.length)return "";
+  return `<div class="tags-todo"><b>Tag on Instagram:</b> ${names.map(n=>esc(n)+" (@___)").join(" · ")}</div>`;
+}
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+async function load(){
+  let data;
+  try{const r=await fetch("content/projects.json",{cache:"no-store"});data=await r.json();}
+  catch(e){document.getElementById("cards").textContent="Could not load projects (open via the live site or local server).";return;}
+  const projects=data.projects||[];
+  document.getElementById("cards").innerHTML=projects.map((p,i)=>{
+    const cap=captionFor(p);
+    return `<div class="card">
+      <div>
+        <img class="lead" src="${p.lead||''}" alt="">
+        <div class="gallerycount">${(p.gallery||[]).length} photos in gallery</div>
+        <div class="flags"><b style="font-weight:500">Info captured:</b><br>${flagsFor(p)}</div>
+        ${tagsTodo(p)}
+      </div>
+      <div>
+        <div class="pname">${esc(p.title)}</div>
+        <div class="ploc">${esc(p.location||"")}</div>
+        <textarea id="cap${i}">${esc(cap)}</textarea>
+        <div class="row">
+          <button onclick="copyCap(${i},this)">Copy caption + hashtags</button>
+          <button class="ghost" onclick="copyTags(${i},this)">Copy hashtags only</button>
+          <span class="copied" id="msg${i}"></span>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+function copyCap(i,btn){
+  const t=document.getElementById("cap"+i);
+  navigator.clipboard.writeText(t.value).then(()=>{document.getElementById("msg"+i).textContent="Copied ✓";setTimeout(()=>document.getElementById("msg"+i).textContent="",2000);});
+}
+function copyTags(i,btn){
+  const t=document.getElementById("cap"+i).value;
+  const tags=t.split("\n").filter(l=>l.trim().startsWith("#")).join(" ");
+  navigator.clipboard.writeText(tags).then(()=>{document.getElementById("msg"+i).textContent="Hashtags copied ✓";setTimeout(()=>document.getElementById("msg"+i).textContent="",2000);});
+}
+load();
+</script>
+</body>
+</html>

@@ -24,16 +24,20 @@ content:
         type: object
         list: true
         fields:
-          - { name: title, label: Title, type: string }
-          - { name: location, label: Location, type: string }
+          - { name: title, label: Project name, type: string }
+          - { name: location, label: Location (suburb, city), type: string }
+          - { name: year, label: Year, type: string, required: false }
           - { name: slug, label: ID (lowercase, no spaces), type: string }
-          - { name: description, label: Description, type: text }
+          - { name: description, label: Short description, type: text }
+          - { name: materials, label: Key materials (comma separated), type: string, required: false }
+          - { name: architect, label: Architect, type: string, required: false }
+          - { name: interiorDesigner, label: Interior designer, type: string, required: false }
+          - { name: builder, label: Builder, type: string, required: false }
+          - { name: photographer, label: Photographer, type: string, required: false }
+          - { name: instagramHook, label: Instagram hook (optional one-liner), type: text, required: false }
           - { name: lead, label: Lead image, type: image }
           - { name: secondary, label: Two detail images, type: image, list: true }
           - { name: gallery, label: Gallery photos, type: image, list: true }
-          - { name: architecture, label: Architecture credit, type: string }
-          - { name: build, label: Build credit, type: string }
-          - { name: photography, label: Photography credit, type: string }
 
   - name: testimonials
     label: Testimonials

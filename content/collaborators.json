@@ -1,14 +1,3 @@
 {
-  "collaborators": [
-    { "name": "Olaver Architecture", "category": "architect", "logo": "", "placeholder": false },
-    { "name": "Add architect", "category": "architect", "logo": "", "placeholder": true },
-    { "name": "Add architect", "category": "architect", "logo": "", "placeholder": true },
-    { "name": "Add interior designer", "category": "designer", "logo": "", "placeholder": true },
-    { "name": "Add interior designer", "category": "designer", "logo": "", "placeholder": true },
-    { "name": "Add interior designer", "category": "designer", "logo": "", "placeholder": true },
-    { "name": "Add builder", "category": "builder", "logo": "", "placeholder": true },
-    { "name": "Add builder", "category": "builder", "logo": "", "placeholder": true },
-    { "name": "Add builder", "category": "builder", "logo": "", "placeholder": true },
-    { "name": "Add studio", "category": "designer", "logo": "", "placeholder": true }
-  ]
+  "collaborators": []
 }
