@@ -1,0 +1,73 @@
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: settings
+    label: Site text
+    type: file
+    path: content/settings.json
+    fields:
+      - { name: heroHeadline, label: Hero headline, type: string }
+      - { name: heroSub, label: Hero sub-line, type: text }
+      - { name: email, label: Contact email, type: string }
+      - { name: locationLine, label: Location line, type: string }
+      - { name: instagram, label: Instagram URL, type: string }
+
+  - name: projects
+    label: Projects
+    type: file
+    path: content/projects.json
+    fields:
+      - name: projects
+        label: Projects
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: location, label: Location, type: string }
+          - { name: slug, label: ID (lowercase, no spaces), type: string }
+          - { name: description, label: Description, type: text }
+          - { name: lead, label: Lead image, type: image }
+          - { name: secondary, label: Two detail images, type: image, list: true }
+          - { name: gallery, label: Gallery photos, type: image, list: true }
+          - { name: architecture, label: Architecture credit, type: string }
+          - { name: build, label: Build credit, type: string }
+          - { name: photography, label: Photography credit, type: string }
+
+  - name: testimonials
+    label: Testimonials
+    type: file
+    path: content/testimonials.json
+    fields:
+      - name: testimonials
+        label: Testimonials
+        type: object
+        list: true
+        fields:
+          - { name: quote, label: Quote, type: text }
+          - { name: name, label: Name, type: string }
+          - { name: practice, label: Practice / studio, type: string }
+          - { name: placeholder, label: Is a placeholder?, type: boolean }
+
+  - name: collaborators
+    label: Collaborators
+    type: file
+    path: content/collaborators.json
+    fields:
+      - name: collaborators
+        label: Collaborators
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - name: category
+            label: Category
+            type: select
+            options:
+              values:
+                - architect
+                - designer
+                - builder
+          - { name: logo, label: Logo (optional), type: image }
+          - { name: placeholder, label: Is a placeholder?, type: boolean }
