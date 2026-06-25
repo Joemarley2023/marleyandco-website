@@ -79,6 +79,28 @@
       "gallery": [
         "/assets/coburg/coburg-01.jpg"
       ]
+    },
+    {
+      "title": "Hanover",
+      "location": "Melbourne",
+      "slug": "hanover",
+      "description": "Floor-to-ceiling American walnut joinery and a stainless steel island, set against a hand-rendered apricot powder room — warm, moody and sculptural.",
+      "materials": "American walnut, stainless steel, stone, lime render",
+      "builder": "Hyland Built",
+      "lead": "/assets/hanover/hanover-03.jpg",
+      "secondary": ["/assets/hanover/hanover-01.jpg", "/assets/hanover/hanover-04.jpg"],
+      "gallery": ["/assets/hanover/hanover-01.jpg", "/assets/hanover/hanover-02.jpg", "/assets/hanover/hanover-03.jpg", "/assets/hanover/hanover-04.jpg"]
+    },
+    {
+      "title": "Walker St",
+      "location": "Melbourne",
+      "slug": "walker",
+      "description": "A pale oak island under a travertine top, framed by blackened timber — a quiet, Japanese-inflected calm, with a marble and brushed-brass kitchen.",
+      "materials": "American oak, travertine, marble, blackened timber",
+      "architect": "Olaver Architecture",
+      "lead": "/assets/walker/walker-01.jpg",
+      "secondary": ["/assets/walker/walker-02.jpg", "/assets/walker/walker-03.jpg"],
+      "gallery": ["/assets/walker/walker-01.jpg", "/assets/walker/walker-02.jpg", "/assets/walker/walker-03.jpg"]
     }
   ]
 }
