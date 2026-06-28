@@ -7,9 +7,9 @@
     { "name": "Glyde", "category": "builder", "url": "https://glyde.com.au/", "logo": "/assets/uploads/logos/glyde.webp", "placeholder": false },
     { "name": "Pasquale Cook", "category": "designer", "url": "https://www.pasqualecook.com/", "logo": "/assets/uploads/logos/pasquale-cook.png", "placeholder": false },
     { "name": "Victor Vieaux", "category": "photographer", "url": "https://www.victorvieaux.com/", "logo": "", "placeholder": false },
-    { "name": "Drawing Room Architecture", "category": "architect", "url": "https://www.drawingroomarchitecture.com.au/", "logo": "", "placeholder": false },
+    { "name": "Drawing Room Architecture", "category": "architect", "url": "https://www.drawingroomarchitecture.com.au/", "logo": "/assets/uploads/logos/drawing-room.jpg", "placeholder": false },
     { "name": "Brave New Eco", "category": "designer", "url": "https://www.braveneweco.com.au/", "logo": "", "placeholder": false },
-    { "name": "Marnie Hawson", "category": "photographer", "url": "https://www.marniehawson.com.au/", "logo": "", "placeholder": false },
+    { "name": "Marnie Hawson", "category": "photographer", "url": "https://www.marniehawson.com.au/", "logo": "/assets/uploads/logos/marnie-hawson.png", "placeholder": false },
     { "name": "Mihaly Slocombe", "category": "architect", "url": "https://mihalyslocombe.com.au/", "logo": "", "placeholder": false },
     { "name": "THA Constructions", "category": "builder", "url": "", "logo": "", "placeholder": false }
   ]
