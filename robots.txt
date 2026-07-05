@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /studio.html
+
+Sitemap: https://marleyandco.com.au/sitemap.xml
