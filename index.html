@@ -181,7 +181,14 @@
   .drop .plus{font-size:18px;color:#c9a87e;line-height:1;flex:0 0 auto}
   .drop #fname{color:#fff;font-size:12.5px;margin-left:auto;text-align:right}
   .fnote{font-size:12.5px;color:#8e887b;margin-top:6px}
-  .formstatus{display:none;background:#c9a87e;color:#1c1a17;padding:16px 20px;border-radius:10px;font-size:15px}
+  .formstatus{display:none;padding:16px 20px;border-radius:10px;font-size:15px;line-height:1.55}
+  .formstatus.show{display:block}
+  .formstatus.ok{background:#c9a87e;color:#1c1a17}
+  .formstatus.err{background:rgba(255,255,255,.06);border:1px solid #c9a87e;color:#e8e2d6}
+  .formstatus a{color:#c9a87e;text-decoration:underline;font-weight:400}
+  .formstatus.ok a{color:#1c1a17}
+  form button[disabled]{opacity:.5;cursor:progress}
+  .fnote.over{color:#e0a08a}
   @media(max-width:760px){.contact .grid2{grid-template-columns:1fr;gap:40px}.contact .lead-col{position:static}.row2{grid-template-columns:1fr}}
 
   /* project gallery lightbox */
@@ -317,11 +324,15 @@
       </div>
     </div>
 
-    <form class="reveal" method="POST" action="https://formsubmit.co/accounts@marleyandco.com.au" enctype="multipart/form-data" id="enquiry">
-      <input type="hidden" name="_subject" value="New enquiry — Marley & Co website">
+    <form class="reveal" method="POST" action="https://formsubmit.co/joe@marleyandco.com.au" enctype="multipart/form-data" id="enquiry">
+      <input type="hidden" name="_subject" value="New enquiry - Marley &amp; Co website">
+      <!-- To: is the address FormSubmit activation is tied to, so it must stay on a mailbox that
+           provably delivers. Enquiries@ is CC'd and receives the same email. Once Enquiries@ is
+           confirmed working and activated, the two can be swapped. -->
+      <input type="hidden" name="_cc" value="Enquiries@marleyandco.com.au">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" id="formNext" value="https://marleyandco-website.joe-4a1.workers.dev/thanks.html">
+      <input type="hidden" name="_next" id="formNext" value="https://marleyandco.com.au/thanks.html">
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
       <div class="grp">
@@ -412,8 +423,8 @@
           Add plans, drawings or reference images
           <span id="fname"></span>
         </label>
-        <input type="file" id="file" name="documents" multiple style="display:none">
-        <div class="fnote">Architectural drawings or a Pinterest/reference set help us quote accurately.</div>
+        <input type="file" id="file" name="attachment" multiple style="display:none">
+        <div class="fnote" id="fnote">Architectural drawings or a Pinterest/reference set help us quote accurately. Up to 10MB in total.</div>
       </div>
 
       <div class="grp">
@@ -430,8 +441,8 @@
         </select>
       </div>
 
-      <button type="submit">Send enquiry</button>
-      <div class="formstatus" id="formstatus">Thanks, we've received your enquiry and will be in touch shortly.</div>
+      <button type="submit" id="sendBtn">Send enquiry</button>
+      <div class="formstatus" id="formstatus" role="status" aria-live="polite"></div>
     </form>
   </div>
 </section>
@@ -462,18 +473,99 @@
   function observeReveals(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el));}
   observeReveals();
 
-  // show chosen file names
-  const fileInput=document.getElementById("file");
+  // ---------- enquiry form ----------
+  // FormSubmit caps attachments at 10MB total; anything larger is rejected server-side.
+  const MAX_UPLOAD=10*1024*1024;
+  // Endpoint address is the one FormSubmit activation is tied to, and the one the fallback uses.
+  const ENQUIRY_TO="joe@marleyandco.com.au";
+  const fileInput=document.getElementById("file"),fnote=document.getElementById("fnote"),fname=document.getElementById("fname");
+  const form=document.getElementById("enquiry"),sendBtn=document.getElementById("sendBtn"),status=document.getElementById("formstatus");
+
+  function totalBytes(){return fileInput&&fileInput.files?Array.from(fileInput.files).reduce((n,f)=>n+f.size,0):0;}
+  function mb(b){return (b/1048576).toFixed(1)+"MB";}
+
   if(fileInput){fileInput.addEventListener("change",function(){
-    const names=Array.from(this.files).map(f=>f.name);
-    document.getElementById("fname").textContent=names.length?names.join(", "):"";
+    const names=Array.from(this.files).map(f=>f.name),bytes=totalBytes();
+    fname.textContent=names.length?(names.length>2?names.length+" files":names.join(", "))+" · "+mb(bytes):"";
+    const over=bytes>MAX_UPLOAD;
+    fnote.classList.toggle("over",over);
+    fnote.textContent=over
+      ?"That's "+mb(bytes)+". Attachments are limited to 10MB in total, so please remove a file or send the large ones by email."
+      :"Architectural drawings or a Pinterest/reference set help us quote accurately. Up to 10MB in total.";
   });}
 
-  // enquiry: native POST to FormSubmit; the post-submit redirect uses the current domain
-  const form=document.getElementById("enquiry");
+  function setStatus(kind,html){
+    status.className="formstatus show "+kind;
+    status.innerHTML=html;
+  }
+
+  // If the backend ever fails, hand the visitor a pre-filled email so the enquiry is never lost.
+  function mailtoFallback(){
+    const d=new FormData(form),get=k=>(d.get(k)||"").toString().trim();
+    const lines=[
+      ["Name",[get("first-name"),get("last-name")].filter(Boolean).join(" ")],
+      ["Phone",get("phone")],["Email",get("email")],["Project location",get("location")],
+      ["Role",get("role")],["Project type",get("project-type")],["Budget",get("budget")],
+      ["Stage",get("stage")],["Installation",get("install")],["Quote needed by",get("quote-by")],
+      ["Heard about us",get("referral")],["Newsletter",d.get("newsletter")?"Yes":"No"],
+      ["Message",get("message")]
+    ].filter(r=>r[1]).map(r=>r[0]+": "+r[1]).join("\n");
+    return "mailto:"+ENQUIRY_TO+"?subject="+encodeURIComponent("Website enquiry")+
+           "&body="+encodeURIComponent(lines+"\n\n(Please attach any plans or drawings to this email.)");
+  }
+
+  function showFailure(){
+    setStatus("err","We couldn't send that just now. Your details are still here, so please try again, "+
+      "or <a href=\""+mailtoFallback()+"\">send it to us by email instead</a> and we'll pick it up straight away.");
+  }
+
   if(form){
+    // Redirect target must stay same-origin so the fetch below can read the outcome.
     const nx=document.getElementById("formNext");
     if(nx)nx.value=location.origin+"/thanks.html";
+
+    form.addEventListener("submit",async function(e){
+      e.preventDefault();
+      if(totalBytes()>MAX_UPLOAD){
+        setStatus("err","Those attachments come to "+mb(totalBytes())+". Please keep them under 10MB in total, or email the large files to us directly.");
+        fnote.scrollIntoView({behavior:"smooth",block:"center"});
+        return;
+      }
+      sendBtn.disabled=true;
+      const label=sendBtn.textContent;
+      sendBtn.textContent="Sending…";
+      status.className="formstatus";
+      try{
+        const ok=totalBytes()>0?await sendWithFiles():await sendJson();
+        if(ok){
+          setStatus("ok","Thank you. We've received your enquiry and will be in touch shortly.");
+          form.reset();fname.textContent="";
+          fnote.classList.remove("over");
+          status.scrollIntoView({behavior:"smooth",block:"center"});
+        }else showFailure();
+      }catch(err){showFailure();}
+      sendBtn.disabled=false;sendBtn.textContent=label;
+    });
+  }
+
+  // No attachments: the AJAX endpoint returns a definitive JSON result.
+  async function sendJson(){
+    const d=new FormData(form),payload={};
+    d.forEach((v,k)=>{if(!(v instanceof File))payload[k]=v;});
+    const r=await fetch("https://formsubmit.co/ajax/"+ENQUIRY_TO,{
+      method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
+    const j=await r.json().catch(()=>null);
+    return !!(r.ok&&j&&String(j.success)==="true");
+  }
+
+  // With attachments: only the standard multipart endpoint carries files.
+  // Success is a redirect to our own _next page; failure keeps us on formsubmit.co.
+  async function sendWithFiles(){
+    const r=await fetch(form.action,{method:"POST",body:new FormData(form)});
+    if(r.redirected&&r.url.indexOf(location.origin)===0)return true;
+    const t=await r.text().catch(()=>"");
+    if(/needs Activation|Unable to submit|"success"\s*:\s*"false"/i.test(t))return false;
+    return r.ok;
   }
 
   // ---------- gallery (data-driven) ----------
