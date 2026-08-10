@@ -6,12 +6,24 @@
 <title>Marley &amp; Co Custom Cabinetry | Bespoke Joinery, Melbourne</title>
 <meta name="description" content="Marley & Co Custom Cabinetry is a Melbourne joinery studio making bespoke kitchens, wardrobes, bathrooms and whole-of-home cabinetry for high-end residential homes, working with architects, designers and builders." />
 <link rel="canonical" href="https://marleyandco.com.au/" />
+<!-- Favicon: Google only shows a logo beside a search result if one is declared here. -->
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#1c1a17" />
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="Marley &amp; Co Custom Cabinetry" />
+<meta property="og:locale" content="en_AU" />
 <meta property="og:url" content="https://marleyandco.com.au/" />
 <meta property="og:title" content="Marley & Co Custom Cabinetry | Bespoke Joinery, Melbourne" />
 <meta property="og:description" content="Melbourne joinery studio making bespoke custom cabinetry and architectural joinery for high-end residential homes." />
-<meta property="og:image" content="https://marleyandco.com.au/assets/hero.jpg" />
+<meta property="og:image" content="https://marleyandco.com.au/assets/share.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Bespoke joinery by Marley &amp; Co, Melbourne" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://marleyandco.com.au/assets/share.jpg" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -559,12 +571,17 @@
   }
 
   // With attachments: only the standard multipart endpoint carries files.
-  // Success is a redirect to our own _next page; failure keeps us on formsubmit.co.
+  // _next is stripped from the request so FormSubmit answers 200 with a result page rather than
+  // redirecting. Following that redirect back to our own origin fails the CORS check on any host
+  // that doesn't send Access-Control-Allow-Origin, which reported delivered enquiries as failures.
+  // The field stays in the DOM so a no-JS native submit still lands on thanks.html.
   async function sendWithFiles(){
-    const r=await fetch(form.action,{method:"POST",body:new FormData(form)});
-    if(r.redirected&&r.url.indexOf(location.origin)===0)return true;
+    const fd=new FormData(form);
+    fd.delete("_next");
+    const r=await fetch(form.action,{method:"POST",body:fd});
     const t=await r.text().catch(()=>"");
     if(/needs Activation|Unable to submit|"success"\s*:\s*"false"/i.test(t))return false;
+    if(/submitted successfully/i.test(t))return true;
     return r.ok;
   }
 
