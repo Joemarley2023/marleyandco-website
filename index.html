@@ -548,7 +548,7 @@
       sendBtn.textContent="Sending…";
       status.className="formstatus";
       try{
-        const ok=totalBytes()>0?await sendWithFiles():await sendJson();
+        const ok=await withRetry(totalBytes()>0?sendWithFiles:sendJson);
         if(ok){
           setStatus("ok","Thank you. We've received your enquiry and will be in touch shortly.");
           form.reset();fname.textContent="";
@@ -558,6 +558,18 @@
       }catch(err){showFailure();}
       sendBtn.disabled=false;sendBtn.textContent=label;
     });
+  }
+
+  // FormSubmit occasionally drops a response or returns one without its CORS header, which makes
+  // fetch throw even though the request was fine. One quiet retry turns that blip into a success
+  // rather than telling a real enquirer their message failed. A definitive rejection returns false
+  // instead of throwing, so it is not retried.
+  async function withRetry(fn){
+    try{return await fn();}
+    catch(e){
+      await new Promise(r=>setTimeout(r,1200));
+      return await fn();
+    }
   }
 
   // No attachments: the AJAX endpoint returns a definitive JSON result.
